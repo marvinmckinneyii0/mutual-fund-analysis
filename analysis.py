@@ -59,3 +59,39 @@ fig.update_layout(
 )
 
 fig.show()
+
+#analyze rate of return
+
+expected_roi_mutual_fund = roi_all_companies[selected_companies.index]
+
+expected_roi_growth_companies = roi_all_companies[top_growth_companies.index]
+
+fig = go.Figure()
+
+fig.add_trace(go.Bar(
+    y=expected_roi_mutual_fund.index,
+    x=expected_roi_mutual_fund,
+    orientation='h',  
+    name='Mutual Fund Companies',
+    marker=dict(color='blue')
+))
+
+fig.add_trace(go.Bar(
+    y=expected_roi_growth_companies.index,
+    x=expected_roi_growth_companies,
+    orientation='h',  
+    name='Growth Rate Companies',
+    marker=dict(color='green'),
+    opacity=0.7
+))
+
+fig.update_layout(
+    title='Expected ROI Comparison: Mutual Fund vs Growth Rate Companies',
+    xaxis_title='Expected ROI (%)',
+    yaxis_title='Companies',
+    barmode='overlay',  
+    legend=dict(title='Company Type'),
+    template='plotly_white'
+)
+
+fig.show()
